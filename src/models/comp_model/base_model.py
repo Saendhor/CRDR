@@ -137,13 +137,13 @@ class BaseModel(nn.Module):
     def pad_images(self, *images:Tensor) -> Union[Tensor, Tuple[Tensor, ...]]:
         out = []
         for img in images:
-            out.append(self._pad_image(img, self.stride, mode='reflect'))
+            out.append(self._pad_image(img, self.stride, mode='constant'))
         if len(out) == 1:
             return out[0]
         return tuple(out)
 
     @staticmethod
-    def _pad_image(x: Tensor, stride: int, mode: str='reflect') -> Tensor:
+    def _pad_image(x: Tensor, stride: int, mode: str='constant') -> Tensor:
         _, _, H, W = x.size()
         padW = int(np.ceil(W / stride) * stride - W)
         padH = int(np.ceil(H / stride) * stride - H)

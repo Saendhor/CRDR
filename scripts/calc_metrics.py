@@ -180,15 +180,23 @@ class LPIPSMetric(BaseMetric):
         lpips_list = []
         dataloader = get_dataloader(real_path_list, fake_path_list, scale="-1_1")
 
+        num_skipped = 0
         for img_real, img_fake in tqdm(
             dataloader, total=len(dataloader), leave=False, ncols=80
         ):
             _, _, H, W = img_real.size()
             assert img_fake.shape == img_real.shape
+            if H < 64 or W < 64:
+                num_skipped += 1
+                continue
             dist = self.lpips_fn.forward(
                 img_fake.to(self.device), img_real.to(self.device)
             )  # calc LPIPS
             lpips_list.append(dist.item())
+        if num_skipped > 0:
+            self.logger.warning(
+                f"Skip {num_skipped} images smaller than 64x64 for LPIPS"
+            )
         return np.mean(lpips_list)
 
 

@@ -1,5 +1,5 @@
 # Calculate metrics
-uv run python scripts/calc_metrics.py --real_dir PATH/TO/DATASET --fake_dir PATH/TO/RECONSTRUCTIONS -d cuda
+uv run python -m scripts.calc_metrics --real_dir ./dataset/block --fake_dir ./results/crdr_q000_b384_mc -d cuda
 
 # Test command
 # poetry run python scripts/calc_metrics.py --real_dir ./datasets/CLIC/test --fake_dir ./results/crdr_q150_b384_CLIC -d cuda

@@ -1,0 +1,32 @@
+OpenCode Chat Export
+====================
+Date: Sun Aug 02 2026
+Working directory: /leonardo/home/userexternal/spennisi/CRDR
+================================================================================
+
+USER
+how can I download the contents of a folder to my current machine?
+
+--------------------------------------------------------------------------------
+ASSISTANT
+From your local machine (not the cluster), use `scp` or `rsync`:
+
+```bash
+# copies the folder contents into a local dir
+scp -r username@leonardo:/leonardo/home/userexternal/spennisi/CRDR ./downloads/
+
+# or rsync (resumable, better for big folders)
+rsync -avP username@leonardo:/leonardo/home/userexternal/spennisi/CRDR/ ./downloads/
+```
+
+Note the trailing `/` on the source means "the contents of" rather than the folder itself. For very large transfers, tar the folder on the cluster first: `tar czf folder.tgz folder/`, then scp the single file.
+
+--------------------------------------------------------------------------------
+USER
+export this conversation in "opencode/02download.txt"
+
+--------------------------------------------------------------------------------
+ASSISTANT
+Created the export at `opencode/02download.txt` following the same format as `01mode_export.txt`.
+
+(End of file - total 16 lines)
