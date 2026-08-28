@@ -1,3 +1,6 @@
+#Make sure you're in the proper directory
+#cd "/leonardo/home/userexternal/spennisi/CRDR"
+
 # Script for inference
 uv run python -m scripts.compress --config_path ./config/crdr.yaml --model_path ./crdr.pth.tar --img_dir dataset/src --save_dir ./results/inf -q 0.00 -b 3.84 --decompress -d cuda
 
