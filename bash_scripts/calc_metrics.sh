@@ -86,4 +86,5 @@ echo ""
 echo "Calculating metrics..."
 echo "====================="
 
-python3 "$PYTHON_SCRIPT" --folder "$FOLDER_PATH" ${REF_FOLDER:+--ref "$REF_FOLDER"}
+cd "$SCRIPT_DIR/.."
+uv run python "$PYTHON_SCRIPT" --folder "$FOLDER_PATH" ${REF_FOLDER:+--ref "$REF_FOLDER"}
