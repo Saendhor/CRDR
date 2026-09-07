@@ -186,7 +186,8 @@ def calculate_fid(folder: Path, ref_folder: Path = None, max_size: int = 299) ->
             for img_path in sorted(src_folder.glob("*.png")):
                 img = Image.open(img_path).convert("RGB")
                 img = img.resize((max_size, max_size), Image.Resampling.LANCZOS)
-                img.save(dst / img_path.name)
+                save_name = img_path.stem if img_path.suffix else img_path.name
+                img.save(dst / f"{save_name}.png")
 
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         fid_value = fid_score.calculate_fid_given_paths(
