@@ -1,0 +1,73 @@
+Chat: Image Quality Metrics Script
+===================================
+
+User: in bash_scripts/ make a bash script that allows me to calculate PSNR, LPIPS, DISTS and FID of a folder of png images.
+
+Assistant: Created two files in bash_scripts/:
+
+1. calc_metrics.sh - Bash wrapper script
+2. calc_metrics.py - Python script with the actual metric calculations
+
+Usage:
+
+    # Calculate all metrics (requires reference folder)
+    ./bash_scripts/calc_metrics.sh /path/to/decoded/images --ref /path/to/original/images
+
+    # Or run the Python script directly
+    python bash_scripts/calc_metrics.py --folder /path/to/decoded/images --ref /path/to/original/images
+
+Options:
+
+    --ref <folder> - Reference folder (required for PSNR, LPIPS, DISTS)
+    --max-size <pixels> - Resize images for memory efficiency
+    --skip-fid - Skip FID calculation
+    --skip-lpips - Skip LPIPS calculation
+    --skip-dists - Skip DISTS calculation
+    --skip-psnr - Skip PSNR calculation
+
+Dependencies (already in pyproject.toml):
+
+    - lpips - for LPIPS metric
+    - dists-pytorch - for DISTS metric
+    - pytorch-fid - for FID metric
+    - scikit-image - for PSNR metric
+    - torch/torchvision - GPU acceleration
+
+---
+
+User: can you explain me how to invoke the script?
+
+Assistant: ## Usage
+
+### Basic syntax
+
+    ./bash_scripts/calc_metrics.sh <folder> --ref <reference_folder>
+
+### Example
+
+    # Calculate PSNR, LPIPS, DISTS, and FID
+    ./bash_scripts/calc_metrics.sh /path/to/decoded/images --ref /path/to/original/images
+
+### What it does
+
+    - <folder> - Folder with PNG images to evaluate (e.g., decoded/compressed images)
+    - --ref <reference_folder> - Folder with original/reference PNG images
+
+### Skip specific metrics
+
+    # Only calculate PSNR, LPIPS, DISTS (skip FID)
+    ./bash_scripts/calc_metrics.sh ./decoded --ref ./original --skip-fid
+
+    # Only calculate FID
+    ./bash_scripts/calc_metrics.sh ./decoded --ref ./original --skip-psnr --skip-lpips --skip-dists
+
+### Using Python directly
+
+    python bash_scripts/calc_metrics.py --folder ./decoded --ref ./original
+
+### Prerequisites
+
+Make sure you have the virtual environment activated:
+
+    source .venv/bin/activate
+
