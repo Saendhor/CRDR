@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-Calculate image quality metrics: PSNR, LPIPS, DISTS, and FID.
+Calculate image quality metrics: PSNR, LPIPS, DISTS, VMAF, and FID.
 
 Usage:
     python calc_metrics.py --folder <folder_path> [--ref <reference_folder>]
@@ -73,6 +73,16 @@ def calculate_lpips(images: List[np.ndarray], ref_images: List[np.ndarray],
     lpips_values = []
     for img, ref in tqdm(zip(images, ref_images), desc="Calculating LPIPS", total=len(images)):
         img, ref = ensure_same_dimensions(img, ref)
+        
+        # Resize to minimum 64x64 to avoid AlexNet pooling errors on small images
+        min_dim = 64
+        h, w = img.shape[:2]
+        if h < min_dim or w < min_dim:
+            scale = max(min_dim / h, min_dim / w)
+            new_h, new_w = int(h * scale), int(w * scale)
+            img = np.array(Image.fromarray(img).resize((new_w, new_h), Image.Resampling.LANCZOS))
+            ref = np.array(Image.fromarray(ref).resize((new_w, new_h), Image.Resampling.LANCZOS))
+        
         # Convert to tensor and normalize to [-1, 1]
         img_tensor = torch.from_numpy(img).permute(2, 0, 1).unsqueeze(0).float() / 127.5 - 1
         ref_tensor = torch.from_numpy(ref).permute(2, 0, 1).unsqueeze(0).float() / 127.5 - 1
@@ -114,6 +124,35 @@ def calculate_dists(images: List[np.ndarray], ref_images: List[np.ndarray],
         dists_values.append(dists_val.item())
     
     return dists_values
+
+
+def calculate_vmaf(images: List[np.ndarray], ref_images: List[np.ndarray],
+                   device: torch.device) -> List[float]:
+    """Calculate VMAF between two sets of images."""
+    from vmaf_torch import VMAF
+
+    if len(images) != len(ref_images):
+        raise ValueError(f"Number of images mismatch: {len(images)} vs {len(ref_images)}")
+
+    vmaf_fn = VMAF(enable_motion=False, clip_score=True).to(device)
+
+    vmaf_values = []
+    for img, ref in tqdm(zip(images, ref_images), desc="Calculating VMAF", total=len(images)):
+        img, ref = ensure_same_dimensions(img, ref)
+
+        # Convert RGB uint8 to Y-channel (luma) tensor [1,1,H,W] float [0,255]
+        ref_luma = 0.299 * ref[:, :, 0] + 0.587 * ref[:, :, 1] + 0.114 * ref[:, :, 2]
+        img_luma = 0.299 * img[:, :, 0] + 0.587 * img[:, :, 1] + 0.114 * img[:, :, 2]
+
+        ref_tensor = torch.from_numpy(ref_luma).unsqueeze(0).unsqueeze(0).float().to(device)
+        img_tensor = torch.from_numpy(img_luma).unsqueeze(0).unsqueeze(0).float().to(device)
+
+        with torch.no_grad():
+            vmaf_score = vmaf_fn(ref_tensor, img_tensor)
+
+        vmaf_values.append(vmaf_score.item())
+
+    return vmaf_values
 
 
 def calculate_fid(folder: Path, ref_folder: Path = None, max_size: int = 299) -> float:
@@ -159,7 +198,7 @@ def main():
     parser.add_argument("--folder", type=Path, required=True, 
                         help="Path to folder containing PNG images to evaluate")
     parser.add_argument("--ref", type=Path, default=None,
-                        help="Path to reference folder (required for PSNR, LPIPS, DISTS)")
+                        help="Path to reference folder (required for PSNR, LPIPS, DISTS, VMAF)")
     parser.add_argument("--max-size", type=int, default=None,
                         help="Maximum image dimension (for memory efficiency)")
     parser.add_argument("--skip-fid", action="store_true",
@@ -170,6 +209,8 @@ def main():
                         help="Skip DISTS calculation")
     parser.add_argument("--skip-psnr", action="store_true",
                         help="Skip PSNR calculation")
+    parser.add_argument("--skip-vmaf", action="store_true",
+                        help="Skip VMAF calculation")
     
     args = parser.parse_args()
     
@@ -206,7 +247,7 @@ def main():
     filenames = []
     
     # Load images if needed for PSNR, LPIPS, or DISTS
-    need_images = not args.skip_psnr or not args.skip_lpips or not args.skip_dists
+    need_images = not args.skip_psnr or not args.skip_lpips or not args.skip_dists or not args.skip_vmaf
     
     if need_images and args.ref:
         print("\nLoading images...")
@@ -245,6 +286,14 @@ def main():
         mean_dists = np.mean(dists_values)
         print(f"DISTS: {mean_dists:.6f} (mean)")
     
+    # Calculate VMAF
+    if not args.skip_vmaf and args.ref:
+        print("\nCalculating VMAF...")
+        vmaf_values = calculate_vmaf(images, ref_images, device)
+        results["VMAF"] = vmaf_values
+        mean_vmaf = np.mean(vmaf_values)
+        print(f"VMAF: {mean_vmaf:.4f} (mean)")
+    
     # Calculate FID
     if not args.skip_fid:
         print("\nCalculating FID...")
@@ -269,6 +318,8 @@ def main():
         print(f"   LPIPS: {np.mean(results['LPIPS']):.6f}")
     if "DISTS" in results:
         print(f"   DISTS: {np.mean(results['DISTS']):.6f}")
+    if "VMAF" in results:
+        print(f"   VMAF: {np.mean(results['VMAF']):.4f}")
     if "FID" in results:
         print(f"      FID: {results['FID']:.4f}")
     print("=" * 50)
@@ -287,7 +338,7 @@ def main():
         f.write(f"Device: {device}\n\n")
         
         # Header
-        metric_names = [k for k in ["PSNR", "LPIPS", "DISTS", "FID"] if k in results and k != "FID"]
+        metric_names = [k for k in ["PSNR", "LPIPS", "DISTS", "VMAF", "FID"] if k in results and k != "FID"]
         header = f"{'filename':<40}" + "".join(f"{m:>14}" for m in metric_names)
         if "FID" in results:
             header += f"{'FID':>14}"
