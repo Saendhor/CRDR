@@ -104,22 +104,41 @@ def calculate_dists(images: List[np.ndarray], ref_images: List[np.ndarray],
     return dists_values
 
 
-def calculate_fid(folder: Path, ref_folder: Path = None) -> float:
-    """Calculate FID score using pytorch-fid."""
+def calculate_fid(folder: Path, ref_folder: Path = None, max_size: int = 299) -> float:
+    """Calculate FID score using pytorch-fid.
+    
+    Resizes all images to (max_size, max_size) in a temp directory since
+    pytorch-fid requires uniform image sizes.
+    """
+    import shutil
+    import tempfile
     from pytorch_fid import fid_score
-    
-    if ref_folder:
+
+    if not ref_folder:
+        return 0.0
+
+    tmp_dir = Path(tempfile.mkdtemp(prefix="fid_"))
+
+    try:
+        for src_folder, label in [(folder, "images"), (ref_folder, "ref")]:
+            dst = tmp_dir / label
+            dst.mkdir(parents=True, exist_ok=True)
+            for img_path in sorted(src_folder.glob("*.png")):
+                img = Image.open(img_path).convert("RGB")
+                img = img.resize((max_size, max_size), Image.Resampling.LANCZOS)
+                img.save(dst / img_path.name)
+
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         fid_value = fid_score.calculate_fid_given_paths(
-            [str(folder), str(ref_folder)],
+            [str(tmp_dir / "images"), str(tmp_dir / "ref")],
             batch_size=50,
-            device=torch.device("cuda" if torch.cuda.is_available() else "cpu"),
+            device=device,
             dims=2048,
-            num_workers=4
+            num_workers=0
         )
-    else:
-        # Calculate FID against itself (should be 0)
-        fid_value = 0.0
-    
+    finally:
+        shutil.rmtree(tmp_dir, ignore_errors=True)
+
     return fid_value
 
 
@@ -218,7 +237,8 @@ def main():
     if not args.skip_fid:
         print("\nCalculating FID...")
         if args.ref:
-            fid_value = calculate_fid(args.folder, args.ref)
+            fid_size = args.max_size if args.max_size else 299
+            fid_value = calculate_fid(args.folder, args.ref, max_size=fid_size)
         else:
             print("Warning: FID requires a reference folder. Skipping...")
             fid_value = None
