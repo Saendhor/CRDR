@@ -20,6 +20,7 @@ dependencies = [
     "pytorch-fid>=0.3.0",
     "scikit-image==0.19.3",
     "dists-pytorch>=0.1",
+    "vmaf-torch>=0.1",
 ]
 
 [tool.uv.sources]
