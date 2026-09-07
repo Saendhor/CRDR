@@ -21,6 +21,15 @@ from skimage.metrics import peak_signal_noise_ratio as psnr
 from tqdm import tqdm
 
 
+def ensure_same_dimensions(img: np.ndarray, ref: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
+    """Resize ref to match img dimensions if they differ."""
+    if img.shape != ref.shape:
+        ref_pil = Image.fromarray(ref)
+        ref_pil = ref_pil.resize((img.shape[1], img.shape[0]), Image.Resampling.LANCZOS)
+        ref = np.array(ref_pil)
+    return img, ref
+
+
 def load_images(folder: Path, max_size: int = None) -> Tuple[List[str], List[np.ndarray]]:
     """Load all PNG images from a folder. Returns (filenames, images)."""
     filenames = []
@@ -44,6 +53,7 @@ def calculate_psnr(images: List[np.ndarray], ref_images: List[np.ndarray]) -> Li
     
     psnr_values = []
     for img, ref in tqdm(zip(images, ref_images), desc="Calculating PSNR", total=len(images)):
+        img, ref = ensure_same_dimensions(img, ref)
         psnr_val = psnr(ref, img, data_range=255)
         psnr_values.append(psnr_val)
     
@@ -62,6 +72,7 @@ def calculate_lpips(images: List[np.ndarray], ref_images: List[np.ndarray],
     
     lpips_values = []
     for img, ref in tqdm(zip(images, ref_images), desc="Calculating LPIPS", total=len(images)):
+        img, ref = ensure_same_dimensions(img, ref)
         # Convert to tensor and normalize to [-1, 1]
         img_tensor = torch.from_numpy(img).permute(2, 0, 1).unsqueeze(0).float() / 127.5 - 1
         ref_tensor = torch.from_numpy(ref).permute(2, 0, 1).unsqueeze(0).float() / 127.5 - 1
@@ -89,6 +100,7 @@ def calculate_dists(images: List[np.ndarray], ref_images: List[np.ndarray],
     
     dists_values = []
     for img, ref in tqdm(zip(images, ref_images), desc="Calculating DISTS", total=len(images)):
+        img, ref = ensure_same_dimensions(img, ref)
         # Convert to tensor and normalize to [0, 1]
         img_tensor = torch.from_numpy(img).permute(2, 0, 1).unsqueeze(0).float() / 255.0
         ref_tensor = torch.from_numpy(ref).permute(2, 0, 1).unsqueeze(0).float() / 255.0
