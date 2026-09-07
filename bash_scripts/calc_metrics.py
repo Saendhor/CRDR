@@ -184,7 +184,7 @@ def calculate_fid(folder: Path, ref_folder: Path = None, max_size: int = 299) ->
             dst = tmp_dir / label
             dst.mkdir(parents=True, exist_ok=True)
             for img_path in sorted(src_folder.glob("*.png")):
-                img = Image.open(img_path).convert("RGB")
+                img = Image.fromarray(np.array(Image.open(img_path).convert("RGB")))
                 img = img.resize((max_size, max_size), Image.Resampling.LANCZOS)
                 save_name = img_path.stem if img_path.suffix else img_path.name
                 img.save(dst / f"{save_name}.png")
