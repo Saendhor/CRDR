@@ -1,0 +1,82 @@
+Folder evaluated: results/inf
+Reference folder: dataset/src
+Date: 2026-09-07 10:50:21
+Device: cuda
+
+filename                                          PSNR         LPIPS         DISTS           FID
+------------------------------------------------------------------------------------------------
+asphalt02.png                                21.372338      0.198945      0.211096       70.1015
+asphalt03.png                                21.983856      0.170899      0.182500       70.1015
+asphaltwasteland01.png                       24.147501      0.208162      0.168559       70.1015
+asphaltwasteland02.png                       24.791034      0.173270      0.188036       70.1015
+asphaltwasteland03.png                       25.387485      0.202690      0.148066       70.1015
+burntbark01.png                              27.434517      0.233989      0.197433       70.1015
+chemicalwastes01.png                         21.230800      0.222651      0.211798       70.1015
+citadelrubblepile01.png                      24.960350      0.166605      0.147152       70.1015
+crackeddirtwastes01.png                      26.733658      0.164122      0.137341       70.1015
+dirt01.png                                   21.524338      0.161949      0.182218       70.1015
+dirtmudwasteland01.png                       24.943966      0.115402      0.169217       70.1015
+dirtpathwasteland01.png                      20.847386      0.100377      0.218337       70.1015
+dirtpebblescanyon01.png                      24.576652      0.153164      0.136211       70.1015
+dirtscumwasteland01.png                      20.344380      0.247059      0.186249       70.1015
+dirtwasteland01.png                          25.310958      0.166996      0.174521       70.1015
+dirtwastes01.png                             27.313542      0.170125      0.157654       70.1015
+grassgreensuburb01.png                       23.674916      0.174456      0.158593       70.1015
+gravelroadwasteland01.png                    25.781788      0.143949      0.168994       70.1015
+groundlitterheavy01.png                      25.507727      0.157399      0.123357       70.1015
+groundlitterlite01.png                       25.491490      0.157829      0.123991       70.1015
+looserockswastes01.png                       25.034440      0.163975      0.143034       70.1015
+mucklowlands.png                             22.292515      0.191374      0.200674       70.1015
+muckpoolwasteland01.png                      23.182620      0.231108      0.186546       70.1015
+muddirtwasteland01.png                       22.899861      0.144541      0.186431       70.1015
+mudslimelowlands.png                         23.038890      0.213625      0.157819       70.1015
+mudwasteland01.png                           23.341343      0.203539      0.183089       70.1015
+nvdatepalmbark.png                           23.334300      0.181468      0.180783       70.1015
+nvfanpalmbark.png                            23.528541      0.109493      0.198383       70.1015
+nvficusbark.png                              25.615457      0.155994      0.167302       70.1015
+nvgraybirchbark.png                          24.884067      0.166851      0.154612       70.1015
+nvhoneymesquitebark.png                      24.251626      0.157655      0.132224       70.1015
+nvitaliancypressbark.png                     25.465374      0.184363      0.208704       70.1015
+nvqueenpalmbark.png                          25.426633      0.166806      0.154227       70.1015
+nvsassafrasbark.png                          23.258946      0.156009      0.153294       70.1015
+oasisbark02.png                              21.779331      0.206536      0.152889       70.1015
+pavement.png                                 23.004840      0.236723      0.215737       70.1015
+pebblesdirtwasteland01.png                   21.938118      0.127782      0.210909       70.1015
+qjrockcanyon01.png                           35.547955      0.160867      0.235966       70.1015
+qjrockcanyoncluster01.png                    24.523447      0.271229      0.276625       70.1015
+riverbedlowlands01.png                       26.493497      0.140074      0.139067       70.1015
+riverbedlowlands02.png                       27.765356      0.244282      0.139601       70.1015
+rockcanyon01.png                             23.776473      0.239414      0.151218       70.1015
+rockcanyon01nv.png                           23.681335      0.245175      0.150138       70.1015
+rockcanyoncluster01.png                      23.046896      0.293116      0.255559       70.1015
+rockcanyonlod.png                            25.474700      0.209776      0.164513       70.1015
+rockcanyonrubble01.png                       24.710961      0.206032      0.185993       70.1015
+rockcanyonrubbledes01.png                    24.710256      0.205947      0.187599       70.1015
+rockcanyonrubbledirt01.png                   26.306086      0.175343      0.202890       70.1015
+rockspebbleswasteland01.png                  24.871432      0.189977      0.186295       70.1015
+rockwasteland01.png                          26.859880      0.141271      0.180786       70.1015
+rockwasteland02.png                          24.437274      0.149628      0.123321       70.1015
+rockwasteland03.png                          25.759465      0.185760      0.111625       70.1015
+rockwasteland04.png                          24.728565      0.176427      0.147215       70.1015
+rockwasteland05.png                          25.062973      0.194249      0.133558       70.1015
+rootsoasis01.png                             21.327992      0.148305      0.146850       70.1015
+rootswastes01.png                            24.988493      0.124718      0.124862       70.1015
+rubblebrick.png                              24.891436      0.155348      0.225653       70.1015
+rubblepile03.png                             24.961611      0.166312      0.137312       70.1015
+rubblepile05.png                             25.039759      0.178992      0.144176       70.1015
+rubblerockwasteland01.png                    24.075557      0.191456      0.168344       70.1015
+scrubdirtcanyon01.png                        25.316348      0.145297      0.146409       70.1015
+scrubdirtstripgreennv01.png                  25.046946      0.181216      0.138117       70.1015
+scrubdirtstripnv01.png                       27.323078      0.187856      0.142694       70.1015
+scrubwastes01.png                            23.326860      0.198939      0.166122       70.1015
+treeevergreen01.png                          22.901605      0.176612      0.213434       70.1015
+treehardwood01.png                           23.153648      0.211514      0.182487       70.1015
+vault22dirt.png                              26.439630      0.220077      0.203175       70.1015
+watergravelsandnv01.png                      24.934410      0.152110      0.154141       70.1015
+watergravelsandnv02.png                      23.873773      0.248886      0.216610       70.1015
+watermossnv01.png                            25.373910      0.217679      0.143195       70.1015
+watermossnv02.png                            23.263230      0.226471      0.224162       70.1015
+waterrockcanyonnv01.png                      25.143992      0.230766      0.125857       70.1015
+watersandnv01.png                            26.857563      0.188164      0.181905       70.1015
+------------------------------------------------------------------------------------------------
+MEAN                                         24.542904      0.184482      0.171719       70.1015
