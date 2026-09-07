@@ -80,7 +80,7 @@ def calculate_lpips(images: List[np.ndarray], ref_images: List[np.ndarray],
 def calculate_dists(images: List[np.ndarray], ref_images: List[np.ndarray], 
                     device: torch.device) -> List[float]:
     """Calculate DISTS between two sets of images."""
-    from dists_pytorch import DISTS
+    from DISTS_pytorch import DISTS
     
     if len(images) != len(ref_images):
         raise ValueError(f"Number of images mismatch: {len(images)} vs {len(ref_images)}")
