@@ -140,6 +140,15 @@ def calculate_vmaf(images: List[np.ndarray], ref_images: List[np.ndarray],
     for img, ref in tqdm(zip(images, ref_images), desc="Calculating VMAF", total=len(images)):
         img, ref = ensure_same_dimensions(img, ref)
 
+        # Resize to minimum 64x64 to avoid wavelet decomposition errors on small images
+        min_dim = 64
+        h, w = img.shape[:2]
+        if h < min_dim or w < min_dim:
+            scale = max(min_dim / h, min_dim / w)
+            new_h, new_w = int(h * scale), int(w * scale)
+            img = np.array(Image.fromarray(img).resize((new_w, new_h), Image.Resampling.LANCZOS))
+            ref = np.array(Image.fromarray(ref).resize((new_w, new_h), Image.Resampling.LANCZOS))
+
         # Convert RGB uint8 to Y-channel (luma) tensor [1,1,H,W] float [0,255]
         ref_luma = 0.299 * ref[:, :, 0] + 0.587 * ref[:, :, 1] + 0.114 * ref[:, :, 2]
         img_luma = 0.299 * img[:, :, 0] + 0.587 * img[:, :, 1] + 0.114 * img[:, :, 2]
