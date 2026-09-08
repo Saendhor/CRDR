@@ -1,0 +1,7 @@
+Metric | Range           | Better Direction | Notes
+-------|-----------------|------------------|------------------------------
+PSNR   | 0 to ∞ dB       | Higher           | 30+ dB is good, 40+ dB is excellent
+LPIPS  | 0 to 1+         | Lower            | 0 = identical, uses neural features
+DISTS  | 0 to 1          | Lower            | 0 = identical, texture+structure
+VMAF   | 0 to 100        | Higher           | 100 = perfect quality
+FID    | 0 to ∞          | Lower            | 0 = identical distributions (generated images)
