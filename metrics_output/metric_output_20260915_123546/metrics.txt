@@ -1,0 +1,43 @@
+Folder evaluated: dataset/png
+Reference folder: dataset/png
+Date: 2026-09-15 12:35:46
+Device: cuda
+
+filename                                          PSNR         LPIPS         DISTS          VMAF           FID
+--------------------------------------------------------------------------------------------------------------
+alley-brick-wall_albedo.png                        inf      0.000000     -0.000000     97.424011       -0.0001
+ash-tree-bark_albedo.png                           inf      0.000000      0.000000     97.427826       -0.0001
+badlands-boulders_albedo.png                       inf      0.000000     -0.000000     97.427826       -0.0001
+bark1-albedo.png                                   inf      0.000000      0.000000     97.427505       -0.0001
+barren-ground-rock_albedo.png                      inf      0.000000     -0.000000     97.426552       -0.0001
+blocky-cliff_albedo.png                            inf      0.000000      0.000000     97.427505       -0.0001
+damascus-steel_albedo.png                          inf      0.000000      0.000000     97.427826       -0.0001
+guts_albedo.png                                    inf      0.000000      0.000000     97.427185       -0.0001
+hexagon-pavers1_albedo.png                         inf      0.000000      0.000000     97.428459       -0.0001
+highway-lanes_albedo.png                           inf      0.000000      0.000000     97.425285       -0.0001
+leaf-front-back_albedo.png                         inf      0.000000      0.000000     97.427505       -0.0001
+light-tree-bark_albedo.png                         inf      0.000000     -0.000000     97.428459       -0.0001
+limestone-cliffs_albedo.png                        inf      0.000000      0.000000     97.427826       -0.0001
+mature-oak-tree-albedo.png                         inf      0.000000     -0.000000     97.427505       -0.0001
+narrow-jungle-leaf_albedo.png                      inf      0.000000      0.000000     97.428139       -0.0001
+obsidian_albedo.png                                inf      0.000000      0.000000     97.426552       -0.0001
+old-hammered-copper_albedo.png                     inf      0.000000      0.000000     97.428459       -0.0001
+pea-gravel_albedo.png                              inf      0.000000     -0.000000     97.427505       -0.0001
+pine-tree-bark_albedo.png                          inf      0.000000      0.000000     97.427505       -0.0001
+ravine-cliff_albedo.png                            inf      0.000000      0.000000     97.427185       -0.0001
+rocky-rugged-terrain_1_albedo.png                  inf      0.000000     -0.000000     97.428139       -0.0001
+sand-dunes1_albedo.png                             inf      0.000000     -0.000000     97.422424       -0.0001
+sloppy-brick-wall_albedo.png                       inf      0.000000      0.000000     97.428772       -0.0001
+sloppy-mortar-stone-wall_albedo.png                inf      0.000000     -0.000000     97.425919       -0.0001
+sludge-covered-stonework_albedo.png                inf      0.000000      0.000000     97.424332       -0.0001
+slum-wall-grunge_albedo.png                        inf      0.000000      0.000000     97.428139       -0.0001
+steelplate1_albedo.png                             inf      0.000000     -0.000000     97.428139       -0.0001
+thick-mortar-stonework_albedo.png                  inf      0.000000      0.000000     97.426552       -0.0001
+thin-moist-brickwork_albedo.png                    inf      0.000000      0.000000     97.428139       -0.0001
+victorian-brick_albedo.png                         inf      0.000000      0.000000     97.428139       -0.0001
+vines_albedo.png                                   inf      0.000000      0.000000     97.427505       -0.0001
+wedged-cobblestone_albedo.png                      inf      0.000000      0.000000     97.427505       -0.0001
+wispy-grass-meadow_albedo.png                      inf      0.000000      0.000000     97.428139       -0.0001
+worn-rusted-painted_albedo.png                     inf      0.000000     -0.000000     97.427505       -0.0001
+--------------------------------------------------------------------------------------------------------------
+MEAN                                               inf      0.000000     -0.000000     97.427234       -0.0001
