@@ -1,0 +1,43 @@
+Folder evaluated: results/inf_15_384
+Reference folder: dataset/Fourth
+Date: 2026-10-13 17:45:02
+Device: cuda
+
+filename                                          PSNR         LPIPS         DISTS          VMAF           FID
+--------------------------------------------------------------------------------------------------------------
+alley-brick-wall_albedo.png                  32.006854      0.111352      0.179843     61.027077       17.2350
+ash-tree-bark_albedo.png                     31.218611      0.103077      0.129697     57.996460       17.2350
+badlands-boulders_albedo.png                 29.387043      0.124158      0.168929     55.042637       17.2350
+bark1-albedo.png                             29.284166      0.101964      0.082653     68.287231       17.2350
+barren-ground-rock_albedo.png                36.922967      0.092929      0.127999     60.101074       17.2350
+blocky-cliff_albedo.png                      32.599644      0.101691      0.079443     62.901936       17.2350
+damascus-steel_albedo.png                    34.000195      0.037141      0.140307     68.701050       17.2350
+guts_albedo.png                              36.700358      0.034306      0.050994     72.158173       17.2350
+hexagon-pavers1_albedo.png                   29.800821      0.086573      0.119989     55.070564       17.2350
+highway-lanes_albedo.png                     30.560218      0.118216      0.076413     52.479149       17.2350
+leaf-front-back_albedo.png                   41.758648      0.021503      0.091965     87.605759       17.2350
+light-tree-bark_albedo.png                   25.709574      0.124049      0.162498     39.304367       17.2350
+limestone-cliffs_albedo.png                  30.590151      0.146498      0.126750     50.170799       17.2350
+mature-oak-tree-albedo.png                   28.640771      0.105767      0.099143     67.288239       17.2350
+narrow-jungle-leaf_albedo.png                47.840785      0.003397      0.036477     90.944839       17.2350
+obsidian_albedo.png                          48.085136      0.006009      0.079045     92.242134       17.2350
+old-hammered-copper_albedo.png               38.611197      0.073408      0.184738     66.265129       17.2350
+pea-gravel_albedo.png                        29.187033      0.041881      0.096848     67.607491       17.2350
+pine-tree-bark_albedo.png                    31.683734      0.136815      0.121887     57.128212       17.2350
+ravine-cliff_albedo.png                      34.103356      0.104471      0.102118     58.098011       17.2350
+rocky-rugged-terrain_1_albedo.png            29.970238      0.107902      0.130724     54.981075       17.2350
+sand-dunes1_albedo.png                       27.537592      0.076628      0.203614     37.732571       17.2350
+sloppy-brick-wall_albedo.png                 34.359736      0.060381      0.078076     67.164474       17.2350
+sloppy-mortar-stone-wall_albedo.png          33.400262      0.093359      0.094751     59.282330       17.2350
+sludge-covered-stonework_albedo.png          40.669672      0.057317      0.132911     73.180649       17.2350
+slum-wall-grunge_albedo.png                  26.491281      0.125301      0.091189     48.516811       17.2350
+steelplate1_albedo.png                       35.811332      0.070068      0.102025     63.233875       17.2350
+thick-mortar-stonework_albedo.png            33.508147      0.093806      0.099080     59.375629       17.2350
+thin-moist-brickwork_albedo.png              30.758585      0.075652      0.118314     64.197327       17.2350
+victorian-brick_albedo.png                   28.901760      0.072648      0.103952     68.256767       17.2350
+vines_albedo.png                             36.296722      0.053053      0.073025     66.924568       17.2350
+wedged-cobblestone_albedo.png                32.093348      0.099778      0.124909     59.871952       17.2350
+wispy-grass-meadow_albedo.png                29.513001      0.104596      0.217730     47.170010       17.2350
+worn-rusted-painted_albedo.png               29.371914      0.038825      0.108235     79.997162       17.2350
+--------------------------------------------------------------------------------------------------------------
+MEAN                                         33.158084      0.082486      0.115773     62.950163       17.2350
