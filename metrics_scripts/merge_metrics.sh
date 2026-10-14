@@ -11,10 +11,17 @@
 # extracts the MEAN values, and writes a single summary table where
 # each row is one evaluated folder (results/<name>) plus its mean metrics.
 #
+# The output also has a BPP column. The mean bpp value for a row named
+# <folder_name> (basename of the evaluated folder, e.g. results/inf_15_256
+# -> inf_15_256) is read from:
+#     <bpp-dir>/<folder_name>/_avg_bitrate.json   (key "avg_bpp")
+# Missing/unreadable files yield "N/A" in the BPP column.
+#
 # Usage:
 #   ./merge_metrics.sh
 #   ./merge_metrics.sh --input-dir metrics_output --output metrics_output/merged_metrics.txt
 #   ./merge_metrics.sh --input-dir metrics_output --sort-by evaluated
+#   ./merge_metrics.sh --bpp-dir /home/commando/Projects/CINECA/experiments/inf
 #
 # No Python required (pure bash + coreutils).
 
@@ -37,7 +44,7 @@ trim() {
 
 usage() {
     cat <<EOF
-Usage: $(basename "$0") [--input-dir DIR] [--output FILE] [--sort-by run|evaluated|date]
+Usage: $(basename "$0") [--input-dir DIR] [--output FILE] [--sort-by run|evaluated|date] [--bpp-dir DIR]
 
 Merge MEAN values from <input-dir>/*/metrics.txt into a single summary .txt file.
 
@@ -47,6 +54,9 @@ Options:
                     relative to this script).
   --output FILE     Output .txt path (default: <input-dir>/merged_metrics.txt).
   --sort-by KEY     Row sort order: run (chronological, default), evaluated, date.
+  --bpp-dir DIR     Folder containing <folder_name>/_avg_bitrate.json files
+                    (default: /home/commando/Projects/CINECA/experiments/inf).
+                    <folder_name> is the basename of the evaluated folder.
   -h, --help        Show this help and exit.
 EOF
 }
@@ -55,6 +65,7 @@ EOF
 INPUT_DIR=""
 OUTPUT=""
 SORT_BY="run"
+BPP_DIR="/home/commando/Projects/CINECA/experiments/inf"
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -69,6 +80,10 @@ while [[ $# -gt 0 ]]; do
         --sort-by)
             [[ $# -lt 2 ]] && { echo "Error: --sort-by needs a value" >&2; exit 1; }
             SORT_BY="$2"; shift 2
+            ;;
+        --bpp-dir)
+            [[ $# -lt 2 ]] && { echo "Error: --bpp-dir needs a value" >&2; exit 1; }
+            BPP_DIR="$2"; shift 2
             ;;
         -h|--help)
             usage; exit 0
@@ -107,6 +122,10 @@ fi
 INPUT_ABS="$(abspath "$INPUT_DIR")"
 OUTPUT_ABS="$(abspath "$OUTPUT")"
 
+if [[ ! -d "$BPP_DIR" ]]; then
+    echo "Warning: BPP directory not found: $BPP_DIR (BPP column will be N/A)." >&2
+fi
+
 # ---------- collect files ----------
 mapfile -t ALL_FILES < <(find "$INPUT_ABS" -name "metrics.txt" -type f | LC_ALL=C sort)
 
@@ -126,11 +145,13 @@ fi
 # ---------- parse ----------
 CANONICAL=(PSNR LPIPS DISTS VMAF FID)
 MISSING="N/A"
+BPP_METRIC="BPP"
 
 declare -a RUNS=()
 declare -a EVALS=()
 declare -a REFS=()
 declare -a DATES=()
+declare -a BPPS=()
 declare -a SEEN_METRICS=()
 declare -A MEANS=()   # key: "<idx>__<metric>" -> value
 
@@ -141,6 +162,35 @@ seen_has() {
         [[ "$m" == "$needle" ]] && return 0
     done
     return 1
+}
+
+# Look up mean bpp for an evaluated folder.
+# <folder_name> is the basename of the evaluated folder (e.g. results/inf_15_256
+# -> inf_15_256), resolved to $BPP_DIR/<folder_name>/_avg_bitrate.json.
+lookup_bpp() {
+    local evaluated="$1"
+    local clean="${evaluated%/}"
+    local base="${clean##*/}"
+    base="$(trim "$base")"
+    if [[ -z "$base" ]]; then
+        printf '%s' "$MISSING"
+        return
+    fi
+    local json="$BPP_DIR/$base/_avg_bitrate.json"
+    if [[ ! -f "$json" ]]; then
+        printf '%s' "$MISSING"
+        return
+    fi
+    local val
+    val="$(sed -n 's/.*"avg_bpp"[[:space:]]*:[[:space:]]*"\{0,1\}\([^",}]*\)"\{0,1\}.*/\1/p' "$json" | head -n1 | tr -d '[:space:]' || true)"
+    if [[ -z "$val" ]]; then
+        val="$(sed -n 's/.*"bpp"[[:space:]]*:[[:space:]]*"\{0,1\}\([^",}]*\)"\{0,1\}.*/\1/p' "$json" | head -n1 | tr -d '[:space:]' || true)"
+    fi
+    if [[ -z "$val" ]]; then
+        printf '%s' "$MISSING"
+    else
+        printf '%s' "$val"
+    fi
 }
 
 count=0
@@ -185,6 +235,7 @@ for f in "${FILES[@]}"; do
     EVALS+=("$evaluated")
     REFS+=("$reference")
     DATES+=("$date")
+    BPPS+=("$(lookup_bpp "$evaluated")")
 
     for i in "${!hnames[@]}"; do
         m="${hnames[$i]}"
@@ -232,6 +283,11 @@ metric_w=14
 for m in "${METRIC_ORDER[@]}"; do
     [[ ${#m} -gt $metric_w ]] && metric_w=${#m}
 done
+# Keep BPP column aligned with metric columns; widen if BPP values need it.
+[[ ${#BPP_METRIC} -gt $metric_w ]] && metric_w=${#BPP_METRIC}
+for b in "${BPPS[@]}"; do
+    [[ ${#b} -gt $metric_w ]] && metric_w=${#b}
+done
 
 # ---------- sort ----------
 declare -a ORDER=()
@@ -265,6 +321,8 @@ for m in "${METRIC_ORDER[@]}"; do
     printf -v cell "%${metric_w}s" "$m"
     header+="  $cell"
 done
+printf -v cell "%${metric_w}s" "$BPP_METRIC"
+header+="  $cell"
 
 rows=()
 for idx in "${ORDER[@]}"; do
@@ -274,6 +332,8 @@ for idx in "${ORDER[@]}"; do
         printf -v cell "%${metric_w}s" "$val"
         row+="  $cell"
     done
+    printf -v cell "%${metric_w}s" "${BPPS[$idx]:-$MISSING}"
+    row+="  $cell"
     rows+=("$row")
 done
 
@@ -284,6 +344,7 @@ now="$(date '+%Y-%m-%d %H:%M:%S')"
 {
     echo "Merged metrics ($count runs, $now)"
     echo "Source: $INPUT_ABS"
+    echo "BPP source: $BPP_DIR/<folder_name>/_avg_bitrate.json"
     echo "Each row = one metrics.txt MEAN row. First column is the evaluated folder (results/<name>)."
     echo ""
     echo "$header"
@@ -306,5 +367,8 @@ for m in "${METRIC_ORDER[@]}"; do
     [[ -n "$metrics_str" ]] && metrics_str+=", "
     metrics_str+="$m"
 done
+[[ -n "$metrics_str" ]] && metrics_str+=", "
+metrics_str+="$BPP_METRIC"
 echo "Metrics: $metrics_str"
+echo "BPP source: $BPP_DIR"
 echo "Merged table written to: $OUTPUT"
