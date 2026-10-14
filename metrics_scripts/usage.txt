@@ -1,0 +1,5 @@
+Usage:
+./metrics_scripts/merge_metrics.sh
+./metrics_scripts/merge_metrics.sh --input-dir metrics_output --output metrics_output/merged_metrics.txt
+./metrics_scripts/merge_metrics.sh --sort-by evaluated|date|run
+./metrics_scripts/merge_metrics.sh --help
