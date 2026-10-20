@@ -2,7 +2,7 @@
 #cd "/leonardo/home/userexternal/spennisi/CRDR"
 
 # Script for inference
-uv run python -m scripts.compress --config_path ./config/crdr.yaml --model_path ./crdr.pth.tar --img_dir dataset/Fourth --save_dir ./results/uncompressed/b00/inf_30_00 -q 3.0 -b 0.00 --decompress -d cuda
+uv run python -m scripts.compress --config_path ./config/crdr.yaml --model_path ./crdr.pth.tar --img_dir dataset/Fourth --save_dir ./results/uncompressed/b256/inf_00_256 -q 0.0 -b 2.56 --decompress -d cuda
 
 # --quality adjusts the bitrate. Float value [0.0, 4.0] - 0.0: Low bitrate, 4.0: High bitrate
 # --beta adjusts realism. Float value [0.0, 5.12] - 0.0: Low distortion, 5.12: High realism
