@@ -1,0 +1,37 @@
+convert_dds_to_png.sh - Input Parameters
+=========================================
+
+Usage: ./convert_dds_to_png.sh [input_folder] [output_folder]
+
+
+input_folder (1st argument)
+---------------------------
+- The directory containing your .dds files
+- Defaults to "." (the current directory) if omitted
+- The script cd's into this directory before scanning for files
+
+output_folder (2nd argument)
+----------------------------
+- Where the converted .png files will be saved
+- Defaults to "./png" if omitted
+- Created automatically if it doesn't exist (mkdir -p)
+
+
+Examples
+--------
+# Uses defaults: reads from cwd, outputs to ./png
+./convert_dds_to_png.sh
+
+# Read from a specific folder, output to cwd/png
+./convert_dds_to_png.sh /path/to/dds/files
+
+# Specify both input and output
+./convert_dds_to_png.sh /path/to/dds/files /path/to/output/pngs
+
+
+Behavior notes
+--------------
+- It skips files that already have a corresponding .png in the output folder,
+  so it's safe to re-run — it won't redo already-converted images.
+- It scans for both *.dds and *.DDS (case coverage), but only strips the
+  lowercase .dds extension when building the output filename.

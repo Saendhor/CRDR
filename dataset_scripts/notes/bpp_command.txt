@@ -1,0 +1,7 @@
+Done:
+bpp_export.txt:76-116: appended ## Lowering DDS bpp to Approach CRDR with format floor table (DXT1=4bpp, DXT5=8bpp), DXT1 + no-mipmaps steps, correct DDS bpp measurement, and Basis/KTX2 alternative.
+convert_png_to_dds.sh:2-16,37:
+- Added 5th arg MIPMAPS="${5:-0}" (default disabled for lowest bpp).
+- Changed magick line to -define "dds:compression=$COMPRESSION" -define "dds:mipmaps=$MIPMAPS".
+- Updated header: quality doesn't affect bpp, use DXT1 + mipmaps=0 for closest to CRDR.
+Verified with bash -n: syntax OK. Use: ./convert_png_to_dds.sh /path/to/pngs ./dds_dxt1 DXT1 100 0.

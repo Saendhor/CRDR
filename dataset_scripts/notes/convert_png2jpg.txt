@@ -1,0 +1,13 @@
+Created and verified 2 scripts (same style/UX as convert_png_to_dds.sh):
+1. convert_png_to_jpg.sh:1
+./convert_png_to_jpg.sh [input_folder] [output_folder] [quality]
+# defaults: . ./jpg 92
+- Converts *.png/*.PNG → *.jpg with magick "$png" -background white -alpha remove -alpha off -quality "$QUALITY".
+- White background needed since JPG has no alpha channel.
+- Skips already-converted files, reports OK/SKIP/FAILED counts.
+2. convert_jpg_to_png.sh:1
+./convert_jpg_to_png.sh [input_folder] [output_folder]
+# defaults: . ./png
+- Converts *.jpg/*.JPG/*.jpeg/*.JPEG → *.png with magick "$jpg".
+- Same skip/count logic.
+Verified roundtrip: test.png (16x16 PNG) → test.jpg (JPEG) → test.png (PNG), plus transparent PNG flatten test — all passed.

@@ -1,0 +1,38 @@
+BPP for Dummies - Chat Export
+=============================
+
+User: the script eval_bpp.sh returns bpp values that are greater than 0, that meaning that there is an increase in quality. since the original images on which I used the afore mentionend script file are compressed, I believe there's an error in the code. can you verify it and tell me if there's any issue?
+
+Assistant: The script is correct. The BPP formula is standard: bpp = (file_size_bytes * 8) / (width * height). BPP being greater than 0 is expected — any file with content will have a non-zero size. BPP is not a quality metric in the sense of "increase" or "decrease." It simply measures the average number of bits used to encode each pixel. For PNG images, uncompressed RGB would be ~24 bpp, PNG typically compresses to 1–12 bpp depending on image complexity. There's no bug here. You may be misunderstanding what BPP represents.
+
+User: i'd like to compare bpp from compressed vs original
+
+Assistant: Both are PNGs, so a straightforward comparison. The current script only processes one folder. I'll modify it to accept both folders and compute a compression ratio.
+
+[Script updated to accept two folders and compute ratio]
+
+Updated. Usage: ./eval_bpp.sh /path/to/original /path/to/compressed
+
+The output now includes:
+- orig_bpp — BPP of the original PNGs
+- comp_bpp — BPP of the compressed PNGs
+- ratio — orig_bpp / comp_bpp (e.g. 2.0x means compressed uses half the bits)
+
+Since both are PNGs, the originals are likely less compressed (higher BPP) and the compressed ones should have lower BPP, giving a ratio > 1.
+
+User: so what results should I expect?
+
+Assistant: If the originals are less compressed PNGs and the compressed ones are more aggressively compressed, you should see:
+- orig_bpp > comp_bpp — originals use more bits per pixel
+- ratio > 1 — indicates compression reduced the file size
+
+Example output:
+  mean_orig_bpp;12.500000
+  mean_comp_bpp;4.200000
+  mean_compression_ratio;2.9762
+
+This would mean the compressed PNGs use ~3x fewer bits per pixel than the originals.
+
+If ratio ≈ 1, both folders have similar compression. If ratio < 1, the compressed folder actually has larger files (unexpected).
+
+Note: PNG is lossless, so both folders should be pixel-identical — only file size differs based on compression settings (e.g. pngquant, optipng, or different zlib levels).

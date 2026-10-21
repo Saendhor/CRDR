@@ -1,0 +1,18 @@
+eval_bpp_folder.sh — single-folder audit
+
+What it does:
+
+Audits one folder, no pairing (eval_bpp_folder.sh:11-12).
+Supports png,jpg,jpeg,dds case-insensitive (nocaseglob, eval_bpp_folder.sh:29-37), top level, no recursion.
+Robust: set -euo pipefail, dir check, prefers magick identify else identify (eval_bpp_folder.sh:19-27), validates numeric non-zero dims, counts failed (eval_bpp_folder.sh:62-74).
+Per file writes: filename;width;height;bytes;bpp (eval_bpp_folder.sh:79).
+Appends footer count,total_bytes,mean_bpp,min_bpp,max_bpp and prints summary (eval_bpp_folder.sh:101-116).
+
+Invoke:
+
+chmod +x eval_bpp_folder.sh
+./eval_bpp_folder.sh [input_folder] [output_csv]
+# ex: ./eval_bpp_folder.sh ./data ./bpp_results.csv
+# defaults: input=. output=./bpp_results.csv
+
+Use eval_bpp.sh to measure compression saving, eval_bpp_folder.sh to profile one dataset/codec. Both need bash, GNU stat, awk, ImageMagick.

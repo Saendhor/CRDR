@@ -1,0 +1,89 @@
+DDS Script Explained
+====================
+
+Question: When converting from PNG to DDS using your script, is there a way to change the quality?
+
+Answer: Yes, you can pass ImageMagick's -quality flag. The script at convert_png_to_dds.sh doesn't currently expose a quality parameter, but you can modify it.
+
+Current script uses:
+  magick "$png" -type TrueColor -define "dds:compression=$COMPRESSION" "$out"
+
+To add quality control, add a 4th parameter and pass it to magick:
+  QUALITY="${4:-90}"
+  magick "$png" -type TrueColor -quality "$QUALITY" -define "dds:compression=$COMPRESSION" "$out"
+
+Usage would be:
+  ./convert_png_to_dds.sh ./png_dir ./dds_output DXT5 90
+
+Important caveat: For DXT1/DXT3/DXT5, the -quality flag has limited effect since these are fixed-ratio block compressors. Quality matters more for:
+  - BC7 (-define dds:compression=BC7) — higher quality, larger files
+  - Uncompressed (none) — no quality loss at all
+
+---
+
+Question: Can you make it so I can change the DXT quality from shell?
+
+Answer: Script updated with quality parameter.
+
+Usage:
+  ./convert_png_to_dds.sh ./png_dir ./dds_output DXT5 80
+
+Defaults: input=., output=dds/, compression=DXT5, quality=100.
+
+---
+
+Question: Can you explain me the values for quality?
+
+Answer: For DDS/DXT compression, -quality behaves differently than JPEG:
+
+Compression    | Quality Effect
+---------------|--------------------------------------------------
+DXT1/3/5       | No effect — these are fixed-ratio block formats (4x4 pixels → fixed bytes)
+BC7            | Controls quality/speed tradeoff (higher = better quality, slower compression)
+Uncompressed   | No effect
+
+Bottom line: For DXT1/DXT3/DXT5, quality is baked into the format — you can't adjust it. The only way to change file size/quality ratio is switching compression types:
+
+  ./convert_png_to_dds.sh input output DXT1    # 1:6 compression, no alpha (smallest)
+  ./convert_png_to_dds.sh input output DXT3    # 1:4 compression, 1-bit alpha
+  ./convert_png_to_dds.sh input output DXT5    # 1:4 compression, smooth alpha (default)
+
+If you need actual quality control, consider BC7 (if your target supports it) or uncompressed.
+
+---
+
+Clarification: "If you need actual quality control, consider BC7 (if your target supports it) or uncompressed."
+
+DXT1/3/5 — These formats use fixed block compression. Every 4x4 pixel block gets compressed to exactly 8 or 16 bytes. There's no "quality dial" — the algorithm either fits or doesn't.
+
+BC7 — This is a newer, more flexible format. It uses multiple compression "modes" that trade off quality vs size. So you can actually get:
+  - Higher quality (larger file)
+  - Lower quality (smaller file)
+
+Uncompressed — Zero quality loss, maximum file size.
+
+"If your target supports it" — BC7 requires DirectX 11+ or OpenGL 4.2+. Older GPUs or game engines may only support DXT1/3/5. So BC7 isn't always an option depending on what you're building for.
+
+In short: DXT formats don't give you quality control. If you need to fine-tune quality vs file size, BC7 or uncompressed are your only real options.
+
+---
+
+Simpler Explanation: DXT vs BC7
+
+DXT (old format, 2001)
+  - Fixed compression: every 4x4 pixel block → always 8 bytes (DXT1) or 16 bytes (DXT3/5)
+  - No quality setting exists. The format itself decides what to keep/discard
+  - Works on old hardware
+
+BC7 (new format, 2010)
+  - Flexible compression: can choose different "modes" per block
+  - Some modes = higher quality, bigger file
+  - Some modes = lower quality, smaller file
+  - You control the tradeoff
+  - Needs newer hardware (DirectX 11+)
+
+The real difference:
+  DXT is like a fixed photo filter — you get what you get.
+  BC7 is like adjustable settings — you choose quality vs size.
+
+That's why -quality flag does nothing for DXT but works for BC7.
