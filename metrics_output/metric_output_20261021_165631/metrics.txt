@@ -1,0 +1,43 @@
+Folder evaluated: results/uncompressed/b384/inf_20_384
+Reference folder: dataset/uncompressed
+Date: 2026-10-21 16:56:31
+Device: cuda
+
+filename                                          PSNR         LPIPS         DISTS          VMAF           FID
+--------------------------------------------------------------------------------------------------------------
+alley-brick-wall_albedo.png                  32.472872      0.089129      0.153684     69.339539       11.2699
+ash-tree-bark_albedo.png                     32.070840      0.082830      0.112294     67.492607       11.2699
+badlands-boulders_albedo.png                 30.369371      0.096094      0.116599     66.263229       11.2699
+bark1-albedo.png                             30.463809      0.079579      0.062417     75.315727       11.2699
+barren-ground-rock_albedo.png                37.302954      0.076149      0.108537     66.448555       11.2699
+blocky-cliff_albedo.png                      33.390170      0.081334      0.063269     70.641281       11.2699
+damascus-steel_albedo.png                    34.626684      0.029129      0.116855     75.143097       11.2699
+guts_albedo.png                              38.039105      0.026180      0.040488     78.121674       11.2699
+hexagon-pavers1_albedo.png                   31.097425      0.069075      0.102202     66.168655       11.2699
+highway-lanes_albedo.png                     31.717298      0.093463      0.064372     63.200874       11.2699
+leaf-front-back_albedo.png                   42.773302      0.016235      0.075116     90.059456       11.2699
+light-tree-bark_albedo.png                   26.693663      0.096057      0.117688     51.965687       11.2699
+limestone-cliffs_albedo.png                  31.164614      0.120759      0.098072     60.705292       11.2699
+mature-oak-tree-albedo.png                   29.927334      0.080138      0.070214     75.268127       11.2699
+narrow-jungle-leaf_albedo.png                48.747992      0.002545      0.029876     92.052994       11.2699
+obsidian_albedo.png                          49.610778      0.005576      0.070556     92.874916       11.2699
+old-hammered-copper_albedo.png               39.378478      0.051907      0.146531     71.987442       11.2699
+pea-gravel_albedo.png                        30.329186      0.031682      0.065869     74.767365       11.2699
+pine-tree-bark_albedo.png                    32.774920      0.107314      0.092216     66.527252       11.2699
+ravine-cliff_albedo.png                      34.834360      0.083325      0.083214     66.923294       11.2699
+rocky-rugged-terrain_1_albedo.png            30.841131      0.084974      0.105894     64.786316       11.2699
+sand-dunes1_albedo.png                       28.760719      0.067728      0.134633     51.044125       11.2699
+sloppy-brick-wall_albedo.png                 35.388498      0.047125      0.066123     75.044083       11.2699
+sloppy-mortar-stone-wall_albedo.png          34.003779      0.076784      0.079226     68.676292       11.2699
+sludge-covered-stonework_albedo.png          41.458838      0.045831      0.112772     76.549561       11.2699
+slum-wall-grunge_albedo.png                  27.925756      0.094065      0.050970     60.653248       11.2699
+steelplate1_albedo.png                       36.534115      0.056481      0.084518     71.053192       11.2699
+thick-mortar-stonework_albedo.png            34.156186      0.076151      0.084608     68.285965       11.2699
+thin-moist-brickwork_albedo.png              31.684078      0.059443      0.098230     72.665291       11.2699
+victorian-brick_albedo.png                   30.172762      0.055531      0.072251     76.197945       11.2699
+vines_albedo.png                             37.506613      0.040114      0.060414     74.625832       11.2699
+wedged-cobblestone_albedo.png                33.074038      0.078502      0.108735     68.527779       11.2699
+wispy-grass-meadow_albedo.png                30.539446      0.078647      0.171676     59.086849       11.2699
+worn-rusted-painted_albedo.png               30.338005      0.028548      0.070537     84.253357       11.2699
+--------------------------------------------------------------------------------------------------------------
+MEAN                                         34.122621      0.064954      0.090902     70.962262       11.2699
