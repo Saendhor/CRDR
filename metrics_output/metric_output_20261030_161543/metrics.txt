@@ -1,0 +1,14 @@
+Folder evaluated: /leonardo/home/userexternal/spennisi/CRDR/dataset/renders/damascus-steel
+Reference image: /leonardo/home/userexternal/spennisi/CRDR/dataset/renders/damascus-steel/src_damascus-steel.png
+Date: 2026-10-30 16:15:43
+Device: cuda
+
+filename                                          PSNR         LPIPS         DISTS          VMAF           BPP
+--------------------------------------------------------------------------------------------------------------
+00384_damascus-steel.png                     42.418484      0.021861      0.052886     84.051529     32.057079
+10384_damascus-steel.png                     44.404299      0.013828      0.037983     88.819283     32.057079
+20384_damascus-steel.png                     46.783095      0.007714      0.021812     92.604851     32.057079
+30384_damascus-steel.png                     49.836039      0.004514      0.012958     94.713593     32.057079
+40384_damascus-steel.png                     51.611416      0.002796      0.010128     95.730995     32.057079
+--------------------------------------------------------------------------------------------------------------
+MEAN                                         47.010666      0.010142      0.027154     91.184050     32.057079

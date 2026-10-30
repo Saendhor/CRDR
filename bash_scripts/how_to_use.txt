@@ -1,1 +1,3 @@
 gpu-run ./bash_scripts/calc_metrics.sh <to_value> --ref <source>
+
+gpu-run ./bash_scripts/calc_metrics_single_ref.sh <folder_of_pngs> <source.png>

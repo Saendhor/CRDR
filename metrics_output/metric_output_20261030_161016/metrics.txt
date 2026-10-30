@@ -1,0 +1,14 @@
+Folder evaluated: /leonardo/home/userexternal/spennisi/CRDR/dataset/renders/ash-tree-bark
+Reference image: /leonardo/home/userexternal/spennisi/CRDR/dataset/renders/ash-tree-bark/src_ash-tree-bark.png
+Date: 2026-10-30 16:10:16
+Device: cuda
+
+filename                                          PSNR         LPIPS         DISTS          VMAF           BPP
+--------------------------------------------------------------------------------------------------------------
+00384_ash-tree-bark.png                      44.248416      0.022641      0.046815     89.311157     32.057079
+10384_ash-tree-bark.png                      46.174222      0.015141      0.032748     92.871742     32.057079
+20384_ash-tree-bark.png                      48.898267      0.008336      0.015988     95.491081     32.057079
+30384_ash-tree-bark.png                      52.034012      0.004447      0.008452     96.230492     32.057079
+40384_ash-tree-bark.png                      53.911770      0.003080      0.004424     96.516418     32.057079
+--------------------------------------------------------------------------------------------------------------
+MEAN                                         49.053337      0.010729      0.021685     94.084178     32.057079
