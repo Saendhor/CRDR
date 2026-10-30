@@ -1,0 +1,50 @@
+Merged metrics (20 runs, 2026-10-21 17:47:35)
+Source: /home/commando/Projects/CRDR/metrics_output
+BPP source: _avg_bitrate.json of each evaluated folder, resolved below /home/commando/Projects/CRDR/results/uncompressed
+Each row = one metrics.txt MEAN row. First column is the evaluated folder (results/<name>).
+
+evaluated_folder                      run                                           PSNR                LPIPS                DISTS                 VMAF                  FID                  BPP
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+results/uncompressed/b00/inf_00_00    metric_output_20261021_163242            31.859680             0.445978             0.323731            36.873955              69.1105  0.05588890524471507
+results/uncompressed/b00/inf_10_00    metric_output_20261021_163606            33.272259             0.327364             0.269511            51.567331              29.8896  0.12172272626091452
+results/uncompressed/b00/inf_20_00    metric_output_20261021_163713            35.231399             0.197108             0.197482            69.072722              11.7924    0.290401907528148
+results/uncompressed/b00/inf_30_00    metric_output_20261021_163831            37.462099             0.093200             0.125417            81.448305               4.5162   0.6121395335477942
+results/uncompressed/b00/inf_40_00    metric_output_20261021_164014            38.975672             0.052704             0.084964            86.119564               2.9176   0.9219880945542279
+results/uncompressed/b256/inf_00_256  metric_output_20261021_164240            31.016491             0.158773             0.189709            40.279738              57.2527  0.05588890524471507
+results/uncompressed/b256/inf_10_256  metric_output_20261021_164410            32.425504             0.104798             0.149667            54.035683              26.8476  0.12172272626091452
+results/uncompressed/b256/inf_20_256  metric_output_20261021_164541            34.446015             0.064446             0.102345            70.398830              11.2698    0.290401907528148
+results/uncompressed/b256/inf_30_256  metric_output_20261021_164702            36.861045             0.036138             0.065256            81.679012               4.6081   0.6121395335477942
+results/uncompressed/b256/inf_40_256  metric_output_20261021_164930            38.350482             0.025589             0.044140            86.460241               3.0588   0.9219880945542279
+results/uncompressed/b384/inf_00_384  metric_output_20261021_165258            30.758665             0.158345             0.179457            40.910325              56.1268  0.05588890524471507
+results/uncompressed/b384/inf_10_384  metric_output_20261021_165510            32.134940             0.105279             0.137789            54.664824              26.1653  0.12172272626091452
+results/uncompressed/b384/inf_20_384  metric_output_20261021_165631            34.122621             0.064954             0.090902            70.962262              11.2699    0.290401907528148
+results/uncompressed/b384/inf_30_384  metric_output_20261021_165847            36.542142             0.036707             0.059109            81.964415               4.6184   0.6121395335477942
+results/uncompressed/b384/inf_40_384  metric_output_20261021_170107            38.002358             0.026415             0.044645            86.678693               3.1154   0.9219880945542279
+results/uncompressed/b512/inf_00_512  metric_output_20261021_170339            30.508290             0.158913             0.172800            41.393254              55.4973  0.05588890524471507
+results/uncompressed/b512/inf_10_512  metric_output_20261021_170613            31.855686             0.106011             0.130930            55.128078              26.0569  0.12172272626091452
+results/uncompressed/b512/inf_20_512  metric_output_20261021_170756            33.800184             0.065578             0.088181            71.349606              11.4278    0.290401907528148
+results/uncompressed/b512/inf_30_512  metric_output_20261021_170911            36.254283             0.037230             0.058868            82.168010               4.6751   0.6121395335477942
+results/uncompressed/b512/inf_40_512  metric_output_20261021_171044            37.681959             0.027426             0.047752            86.747491               3.1492   0.9219880945542279
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Details per run:
+  metric_output_20261021_163242: results/uncompressed/b00/inf_00_00, ref=dataset/uncompressed, date=2026-10-21 16:32:42
+  metric_output_20261021_163606: results/uncompressed/b00/inf_10_00, ref=dataset/uncompressed, date=2026-10-21 16:36:06
+  metric_output_20261021_163713: results/uncompressed/b00/inf_20_00, ref=dataset/uncompressed, date=2026-10-21 16:37:13
+  metric_output_20261021_163831: results/uncompressed/b00/inf_30_00, ref=dataset/uncompressed, date=2026-10-21 16:38:31
+  metric_output_20261021_164014: results/uncompressed/b00/inf_40_00, ref=dataset/uncompressed, date=2026-10-21 16:40:14
+  metric_output_20261021_164240: results/uncompressed/b256/inf_00_256, ref=dataset/uncompressed, date=2026-10-21 16:42:40
+  metric_output_20261021_164410: results/uncompressed/b256/inf_10_256, ref=dataset/uncompressed, date=2026-10-21 16:44:10
+  metric_output_20261021_164541: results/uncompressed/b256/inf_20_256, ref=dataset/uncompressed, date=2026-10-21 16:45:41
+  metric_output_20261021_164702: results/uncompressed/b256/inf_30_256, ref=dataset/uncompressed, date=2026-10-21 16:47:02
+  metric_output_20261021_164930: results/uncompressed/b256/inf_40_256, ref=dataset/uncompressed, date=2026-10-21 16:49:30
+  metric_output_20261021_165258: results/uncompressed/b384/inf_00_384, ref=dataset/uncompressed, date=2026-10-21 16:52:58
+  metric_output_20261021_165510: results/uncompressed/b384/inf_10_384, ref=dataset/uncompressed, date=2026-10-21 16:55:10
+  metric_output_20261021_165631: results/uncompressed/b384/inf_20_384, ref=dataset/uncompressed, date=2026-10-21 16:56:31
+  metric_output_20261021_165847: results/uncompressed/b384/inf_30_384, ref=dataset/uncompressed, date=2026-10-21 16:58:47
+  metric_output_20261021_170107: results/uncompressed/b384/inf_40_384, ref=dataset/uncompressed, date=2026-10-21 17:01:07
+  metric_output_20261021_170339: results/uncompressed/b512/inf_00_512, ref=dataset/uncompressed, date=2026-10-21 17:03:39
+  metric_output_20261021_170613: results/uncompressed/b512/inf_10_512, ref=dataset/uncompressed, date=2026-10-21 17:06:13
+  metric_output_20261021_170756: results/uncompressed/b512/inf_20_512, ref=dataset/uncompressed, date=2026-10-21 17:07:56
+  metric_output_20261021_170911: results/uncompressed/b512/inf_30_512, ref=dataset/uncompressed, date=2026-10-21 17:09:11
+  metric_output_20261021_171044: results/uncompressed/b512/inf_40_512, ref=dataset/uncompressed, date=2026-10-21 17:10:44
