@@ -77,15 +77,6 @@ if [ ! -d "$FOLDER_PATH" ]; then
     exit 1
 fi
 
-# Check if folder contains PNG images
-PNG_COUNT=$(find "$FOLDER_PATH" -maxdepth 1 -name "*.png" -type f | wc -l)
-if [ "$PNG_COUNT" -eq 0 ]; then
-    echo "Error: No PNG images found in $FOLDER_PATH"
-    exit 1
-fi
-
-echo "Found $PNG_COUNT PNG images in $FOLDER_PATH"
-
 # Check reference image
 if [ ! -f "$SOURCE_IMAGE" ]; then
     echo "Error: Reference image not found: $SOURCE_IMAGE"
@@ -100,16 +91,24 @@ case "$SOURCE_IMAGE" in
         ;;
 esac
 
-echo "Reference image: $SOURCE_IMAGE"
+# Check if folder contains PNG images (the reference image is ignored if it is inside)
+PNG_COUNT=$(find "$FOLDER_PATH" -maxdepth 1 -name "*.png" -type f ! -samefile "$SOURCE_IMAGE" | wc -l)
+if [ "$PNG_COUNT" -eq 0 ]; then
+    echo "Error: No PNG images found in $FOLDER_PATH (excluding the reference image)"
+    exit 1
+fi
+
+echo "Found $PNG_COUNT PNG images in $FOLDER_PATH"
 
 # Resolve paths to absolute ones, since the Python script runs from the repo root
 SOURCE_IMAGE="$(cd "$(dirname "$SOURCE_IMAGE")" && pwd)/$(basename "$SOURCE_IMAGE")"
 FOLDER_PATH="$(cd "$FOLDER_PATH" && pwd)"
 
-# Warn if the reference image is inside the evaluated folder
-SOURCE_DIR="$(dirname "$SOURCE_IMAGE")"
-if [ "$SOURCE_DIR" = "$FOLDER_PATH" ]; then
-    echo "Warning: Reference image is inside the evaluated folder (self-comparison gives infinite PSNR)"
+echo "Reference image: $SOURCE_IMAGE"
+
+# Note if the reference image is inside the evaluated folder
+if [ "$(dirname "$SOURCE_IMAGE")" = "$FOLDER_PATH" ]; then
+    echo "Note: reference image $(basename "$SOURCE_IMAGE") is inside the evaluated folder and will be ignored"
 fi
 
 # Run Python script

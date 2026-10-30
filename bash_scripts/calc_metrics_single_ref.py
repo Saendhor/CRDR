@@ -11,6 +11,7 @@ Usage:
 """
 
 import argparse
+import os
 import shutil
 import sys
 import tempfile
@@ -32,6 +33,22 @@ from calc_metrics import (  # noqa: E402
     calculate_vmaf,
     load_images,
 )
+
+
+def is_same_file(path_a: Path, path_b: Path) -> bool:
+    """Return True if both paths point to the same file (or directory)."""
+    try:
+        return path_a.resolve() == path_b.resolve()
+    except OSError:
+        return False
+
+
+def link_or_copy(src_path: Path, dst_path: Path) -> None:
+    """Hard-link src to dst, falling back to a copy across filesystems."""
+    try:
+        os.link(src_path, dst_path)
+    except OSError:
+        shutil.copy2(src_path, dst_path)
 
 
 def load_single_image(image_path: Path, max_size: int = None) -> np.ndarray:
@@ -59,15 +76,27 @@ def calculate_bpp(folder: Path, filenames: List[str]) -> List[float]:
 def calculate_fid_single_ref(folder: Path, source_path: Path, max_size: int = 299) -> float:
     """Calculate FID between the evaluated folder and the single reference image.
 
-    calculate_fid() requires a reference folder, so the source image is copied
-    into a temporary folder (with a single image) and passed as the reference.
+    calculate_fid() requires two folders, so a temporary folder is built: one
+    copy of the source image as the reference, and the evaluated images as the
+    other side. The source image is left out of the evaluated side in case it
+    also lives in the evaluated folder.
     """
-    tmp_ref_dir = Path(tempfile.mkdtemp(prefix="fid_ref_"))
+    tmp_dir = Path(tempfile.mkdtemp(prefix="fid_single_ref_"))
     try:
-        shutil.copy2(source_path, tmp_ref_dir / f"{source_path.stem}.png")
-        return calculate_fid(folder, tmp_ref_dir, max_size=max_size)
+        ref_dir = tmp_dir / "ref"
+        img_dir = tmp_dir / "images"
+        ref_dir.mkdir()
+        img_dir.mkdir()
+
+        for img_path in sorted(folder.glob("*.png")):
+            if is_same_file(img_path, source_path):
+                continue
+            link_or_copy(img_path, img_dir / img_path.name)
+
+        link_or_copy(source_path, ref_dir / source_path.name)
+        return calculate_fid(img_dir, ref_dir, max_size=max_size)
     finally:
-        shutil.rmtree(tmp_ref_dir, ignore_errors=True)
+        shutil.rmtree(tmp_dir, ignore_errors=True)
 
 
 def main():
@@ -109,11 +138,17 @@ def main():
         print(f"Error: Reference is not a file: {args.source}")
         sys.exit(1)
 
-    # Check for PNG images
-    folder_pngs = list(args.folder.glob("*.png"))
+    # Check for PNG images (the reference image is ignored if it is in the folder)
+    source_in_folder = is_same_file(args.source.parent, args.folder)
+    folder_pngs = [p for p in args.folder.glob("*.png")
+                   if not is_same_file(p, args.source)]
     if not folder_pngs:
-        print(f"Error: No PNG images found in {args.folder}")
+        print(f"Error: No PNG images found in {args.folder} (excluding the reference image)")
         sys.exit(1)
+
+    if source_in_folder:
+        print(f"Note: reference image {args.source.name} is inside the evaluated "
+              f"folder and will be ignored")
 
     print(f"Found {len(folder_pngs)} PNG images in {args.folder}")
     print(f"Reference image: {args.source}")
@@ -132,6 +167,12 @@ def main():
     if need_images:
         print("\nLoading images...")
         filenames, images = load_images(args.folder, args.max_size)
+        # Drop the reference image if it was loaded from the evaluated folder
+        kept = [(name, img) for name, img in zip(filenames, images)
+                if not is_same_file(args.folder / name, args.source)]
+        filenames = [name for name, _ in kept]
+        images = [img for _, img in kept]
+
         source_image = load_single_image(args.source, args.max_size)
         # Every image is compared against the same reference image
         ref_images = [source_image] * len(images)
