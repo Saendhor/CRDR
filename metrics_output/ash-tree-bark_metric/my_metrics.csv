@@ -1,0 +1,7 @@
+"Reference","Test","Mean","Weighted median","1st weighted quartile","3rd weighted quartile","Min","Max","Evaluation time"
+"dataset/renders/ash-tree-bark/src_ash-tree-bark.png","dataset/renders/ash-tree-bark/00384_ash-tree-bark.png","0.014343","0.054776","0.034172","0.079345","0.000000","0.267616","2.7509"
+"dataset/renders/ash-tree-bark/src_ash-tree-bark.png","dataset/renders/ash-tree-bark/10384_ash-tree-bark.png","0.011446","0.043676","0.027142","0.063170","0.000000","0.200559","2.7520"
+"dataset/renders/ash-tree-bark/src_ash-tree-bark.png","dataset/renders/ash-tree-bark/20384_ash-tree-bark.png","0.008486","0.032156","0.020102","0.046503","0.000000","0.153061","2.8434"
+"dataset/renders/ash-tree-bark/src_ash-tree-bark.png","dataset/renders/ash-tree-bark/30384_ash-tree-bark.png","0.006370","0.023932","0.015133","0.034121","0.000000","0.103185","2.7544"
+"dataset/renders/ash-tree-bark/src_ash-tree-bark.png","dataset/renders/ash-tree-bark/40384_ash-tree-bark.png","0.005313","0.019845","0.012632","0.028207","0.000000","0.085466","2.7510"
+"dataset/renders/ash-tree-bark/src_ash-tree-bark.png","dataset/renders/ash-tree-bark/src_ash-tree-bark.png","0.000000","0.000000","0.000000","0.000000","0.000000","0.000000","2.7307"

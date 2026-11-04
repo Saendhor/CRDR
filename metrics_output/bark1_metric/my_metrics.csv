@@ -1,0 +1,7 @@
+"Reference","Test","Mean","Weighted median","1st weighted quartile","3rd weighted quartile","Min","Max","Evaluation time"
+"dataset/renders/bark1/src_bark.png","dataset/renders/bark1/00384_bark.png","0.031554","0.108582","0.073276","0.147527","0.000000","0.376786","2.9794"
+"dataset/renders/bark1/src_bark.png","dataset/renders/bark1/10384_bark.png","0.024204","0.082444","0.056366","0.111506","0.000000","0.296514","2.8763"
+"dataset/renders/bark1/src_bark.png","dataset/renders/bark1/20384_bark.png","0.017519","0.059183","0.040758","0.079719","0.000000","0.227624","3.0079"
+"dataset/renders/bark1/src_bark.png","dataset/renders/bark1/30384_bark.png","0.012825","0.043065","0.029920","0.057350","0.000000","0.149855","3.0104"
+"dataset/renders/bark1/src_bark.png","dataset/renders/bark1/40384_bark.png","0.010784","0.036003","0.025215","0.047804","0.000000","0.125059","2.9343"
+"dataset/renders/bark1/src_bark.png","dataset/renders/bark1/src_bark.png","0.000000","0.000000","0.000000","0.000000","0.000000","0.000000","2.8616"

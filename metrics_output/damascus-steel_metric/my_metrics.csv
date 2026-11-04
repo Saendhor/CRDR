@@ -1,0 +1,7 @@
+"Reference","Test","Mean","Weighted median","1st weighted quartile","3rd weighted quartile","Min","Max","Evaluation time"
+"dataset/renders/damascus-steel/src_damascus-steel.png","dataset/renders/damascus-steel/00384_damascus-steel.png","0.021890","0.068226","0.046410","0.093955","0.000000","0.249505","2.8275"
+"dataset/renders/damascus-steel/src_damascus-steel.png","dataset/renders/damascus-steel/10384_damascus-steel.png","0.017037","0.053980","0.036010","0.075215","0.000000","0.215644","2.8283"
+"dataset/renders/damascus-steel/src_damascus-steel.png","dataset/renders/damascus-steel/20384_damascus-steel.png","0.013063","0.041036","0.027690","0.057075","0.000000","0.153266","2.8982"
+"dataset/renders/damascus-steel/src_damascus-steel.png","dataset/renders/damascus-steel/30384_damascus-steel.png","0.009896","0.030654","0.021003","0.042082","0.000000","0.107520","2.8229"
+"dataset/renders/damascus-steel/src_damascus-steel.png","dataset/renders/damascus-steel/40384_damascus-steel.png","0.008871","0.027070","0.018910","0.036369","0.000000","0.092180","2.8217"
+"dataset/renders/damascus-steel/src_damascus-steel.png","dataset/renders/damascus-steel/src_damascus-steel.png","0.000000","0.000000","0.000000","0.000000","0.000000","0.000000","2.8120"
