@@ -1,0 +1,14 @@
+Folder evaluated: /leonardo/home/userexternal/spennisi/CRDR/dataset/renders/pea-gravel
+Reference image: /leonardo/home/userexternal/spennisi/CRDR/dataset/renders/pea-gravel/src_pea-gravel.png
+Date: 2026-11-19 11:31:05
+Device: cuda
+
+filename                                          PSNR         LPIPS         DISTS          VMAF           BPP
+--------------------------------------------------------------------------------------------------------------
+00_pea-gravel.png                            36.286792      0.032124      0.049406     67.898811     32.058476
+10_pea-gravel.png                            39.200187      0.017331      0.024940     79.290123     32.058476
+20_pea-gravel.png                            42.676466      0.008324      0.009446     87.367752     32.058476
+30_pea-gravel.png                            45.978102      0.003935      0.003898     92.234200     32.058476
+40_pea-gravel.png                            47.864261      0.002426      0.002809     94.336273     32.058476
+--------------------------------------------------------------------------------------------------------------
+MEAN                                         42.401162      0.012828      0.018100     84.225432     32.058476

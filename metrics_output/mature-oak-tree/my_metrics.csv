@@ -1,0 +1,7 @@
+"Reference","Test","Mean","Weighted median","1st weighted quartile","3rd weighted quartile","Min","Max","Evaluation time"
+"dataset/renders/mature-oak-tree/src_mature-oak-tree.png","dataset/renders/mature-oak-tree/00_mature-oak-tree.png","0.026387","0.095333","0.061496","0.134299","0.000000","0.453013","2.8279"
+"dataset/renders/mature-oak-tree/src_mature-oak-tree.png","dataset/renders/mature-oak-tree/10_mature-oak-tree.png","0.020176","0.071979","0.047131","0.100045","0.000000","0.296534","2.8256"
+"dataset/renders/mature-oak-tree/src_mature-oak-tree.png","dataset/renders/mature-oak-tree/20_mature-oak-tree.png","0.014519","0.051201","0.033956","0.071025","0.000000","0.237892","2.9457"
+"dataset/renders/mature-oak-tree/src_mature-oak-tree.png","dataset/renders/mature-oak-tree/30_mature-oak-tree.png","0.010677","0.037289","0.024986","0.051109","0.000000","0.167712","2.9069"
+"dataset/renders/mature-oak-tree/src_mature-oak-tree.png","dataset/renders/mature-oak-tree/40_mature-oak-tree.png","0.009139","0.031731","0.021529","0.043034","0.000000","0.126989","2.9228"
+"dataset/renders/mature-oak-tree/src_mature-oak-tree.png","dataset/renders/mature-oak-tree/src_mature-oak-tree.png","0.000000","0.000000","0.000000","0.000000","0.000000","0.000000","2.7929"

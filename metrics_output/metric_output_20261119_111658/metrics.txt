@@ -1,0 +1,14 @@
+Folder evaluated: /leonardo/home/userexternal/spennisi/CRDR/dataset/renders/blocky-cliff
+Reference image: /leonardo/home/userexternal/spennisi/CRDR/dataset/renders/blocky-cliff/src_blocky-cliff.png
+Date: 2026-11-19 11:16:58
+Device: cuda
+
+filename                                          PSNR         LPIPS         DISTS          VMAF           BPP
+--------------------------------------------------------------------------------------------------------------
+00_blocky-cliff.png                          40.248366      0.039427      0.042992     80.935860     32.058476
+10_blocky-cliff.png                          42.392424      0.025675      0.029275     87.857094     32.058476
+20_blocky-cliff.png                          45.241161      0.015255      0.017904     92.502991     32.058476
+30_blocky-cliff.png                          48.430823      0.007871      0.009306     95.217850     32.058476
+40_blocky-cliff.png                          50.160914      0.005110      0.006121     96.150520     32.058476
+--------------------------------------------------------------------------------------------------------------
+MEAN                                         45.294738      0.018668      0.021119     90.532863     32.058476

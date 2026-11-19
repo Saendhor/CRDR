@@ -1,0 +1,7 @@
+"Reference","Test","Mean","Weighted median","1st weighted quartile","3rd weighted quartile","Min","Max","Evaluation time"
+"dataset/renders/pea-gravel/src_pea-gravel.png","dataset/renders/pea-gravel/00_pea-gravel.png","0.036714","0.113371","0.079145","0.152688","0.000000","0.367132","2.8506"
+"dataset/renders/pea-gravel/src_pea-gravel.png","dataset/renders/pea-gravel/10_pea-gravel.png","0.027850","0.086117","0.060362","0.115220","0.000000","0.280706","2.8124"
+"dataset/renders/pea-gravel/src_pea-gravel.png","dataset/renders/pea-gravel/20_pea-gravel.png","0.020337","0.062624","0.044288","0.083069","0.000000","0.205341","2.8440"
+"dataset/renders/pea-gravel/src_pea-gravel.png","dataset/renders/pea-gravel/30_pea-gravel.png","0.015129","0.046243","0.033036","0.060788","0.000000","0.153683","2.7821"
+"dataset/renders/pea-gravel/src_pea-gravel.png","dataset/renders/pea-gravel/40_pea-gravel.png","0.012887","0.039255","0.028181","0.051281","0.000000","0.117918","2.7826"
+"dataset/renders/pea-gravel/src_pea-gravel.png","dataset/renders/pea-gravel/src_pea-gravel.png","0.000000","0.000000","0.000000","0.000000","0.000000","0.000000","2.7499"

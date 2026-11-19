@@ -1,0 +1,14 @@
+Folder evaluated: /leonardo/home/userexternal/spennisi/CRDR/dataset/renders/mature-oak-tree
+Reference image: /leonardo/home/userexternal/spennisi/CRDR/dataset/renders/mature-oak-tree/src_mature-oak-tree.png
+Date: 2026-11-19 11:19:50
+Device: cuda
+
+filename                                          PSNR         LPIPS         DISTS          VMAF           BPP
+--------------------------------------------------------------------------------------------------------------
+00_mature-oak-tree.png                       37.174556      0.045762      0.039167     75.279556     32.058476
+10_mature-oak-tree.png                       40.123338      0.027831      0.026054     85.030212     32.058476
+20_mature-oak-tree.png                       43.830516      0.014725      0.012092     91.100334     32.058476
+30_mature-oak-tree.png                       47.500881      0.007190      0.006161     94.340401     32.058476
+40_mature-oak-tree.png                       49.544678      0.004244      0.004532     95.396194     32.058476
+--------------------------------------------------------------------------------------------------------------
+MEAN                                         43.634794      0.019950      0.017601     88.229340     32.058476

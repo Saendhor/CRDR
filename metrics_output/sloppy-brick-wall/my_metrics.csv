@@ -1,0 +1,7 @@
+"Reference","Test","Mean","Weighted median","1st weighted quartile","3rd weighted quartile","Min","Max","Evaluation time"
+"dataset/renders/sloppy-brick-wall/src_sloppy-brick-wall.png","dataset/renders/sloppy-brick-wall/00_sloppy-brick-wall.png","0.018417","0.066589","0.042808","0.096118","0.000000","0.318974","2.8293"
+"dataset/renders/sloppy-brick-wall/src_sloppy-brick-wall.png","dataset/renders/sloppy-brick-wall/10_sloppy-brick-wall.png","0.014631","0.053172","0.033710","0.076716","0.000000","0.239011","2.8290"
+"dataset/renders/sloppy-brick-wall/src_sloppy-brick-wall.png","dataset/renders/sloppy-brick-wall/20_sloppy-brick-wall.png","0.010739","0.038867","0.024750","0.055818","0.000000","0.165921","2.8315"
+"dataset/renders/sloppy-brick-wall/src_sloppy-brick-wall.png","dataset/renders/sloppy-brick-wall/30_sloppy-brick-wall.png","0.007794","0.028006","0.018120","0.039572","0.000000","0.114259","2.8336"
+"dataset/renders/sloppy-brick-wall/src_sloppy-brick-wall.png","dataset/renders/sloppy-brick-wall/40_sloppy-brick-wall.png","0.006698","0.024003","0.015714","0.033309","0.000000","0.090285","2.8361"
+"dataset/renders/sloppy-brick-wall/src_sloppy-brick-wall.png","dataset/renders/sloppy-brick-wall/src_sloppy-brick-wall.png","0.000000","0.000000","0.000000","0.000000","0.000000","0.000000","2.8066"

@@ -1,0 +1,14 @@
+Folder evaluated: /leonardo/home/userexternal/spennisi/CRDR/dataset/renders/sloppy-brick-wall
+Reference image: /leonardo/home/userexternal/spennisi/CRDR/dataset/renders/sloppy-brick-wall/src_sloppy-brick-wall.png
+Date: 2026-11-19 11:32:33
+Device: cuda
+
+filename                                          PSNR         LPIPS         DISTS          VMAF           BPP
+--------------------------------------------------------------------------------------------------------------
+00_sloppy-brick-wall.png                     43.119031      0.027255      0.054129     89.052208     32.058476
+10_sloppy-brick-wall.png                     45.234172      0.016235      0.032360     92.629921     32.058476
+20_sloppy-brick-wall.png                     48.189057      0.008794      0.019409     95.414604     32.058476
+30_sloppy-brick-wall.png                     51.502462      0.004372      0.010847     96.463737     32.058476
+40_sloppy-brick-wall.png                     53.139775      0.002932      0.007744     96.869934     32.058476
+--------------------------------------------------------------------------------------------------------------
+MEAN                                         48.236899      0.011918      0.024898     94.086081     32.058476

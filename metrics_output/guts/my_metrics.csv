@@ -1,0 +1,7 @@
+"Reference","Test","Mean","Weighted median","1st weighted quartile","3rd weighted quartile","Min","Max","Evaluation time"
+"dataset/renders/guts/src_guts.png","dataset/renders/guts/00_guts.png","0.026627","0.086112","0.060430","0.113445","0.000000","0.270754","2.8477"
+"dataset/renders/guts/src_guts.png","dataset/renders/guts/10_guts.png","0.021427","0.068916","0.048789","0.090597","0.000000","0.216558","2.8520"
+"dataset/renders/guts/src_guts.png","dataset/renders/guts/20_guts.png","0.015607","0.050074","0.035206","0.066273","0.000000","0.165608","3.0249"
+"dataset/renders/guts/src_guts.png","dataset/renders/guts/30_guts.png","0.011268","0.035833","0.025217","0.047639","0.000000","0.109730","2.8436"
+"dataset/renders/guts/src_guts.png","dataset/renders/guts/40_guts.png","0.009933","0.031512","0.022220","0.041583","0.000000","0.109511","2.8462"
+"dataset/renders/guts/src_guts.png","dataset/renders/guts/src_guts.png","0.000000","0.000000","0.000000","0.000000","0.000000","0.000000","2.8059"
