@@ -1,0 +1,16 @@
+Created png2dds_bc7.sh in the working directory and made it executable (syntax-checked with bash -n).
+./png2dds_bc7.sh textures/                       # .dds next to the .pngs
+./png2dds_bc7.sh -o out -s -m textures/          # sRGB + full mip chain
+./png2dds_bc7.sh -r -q max -o build assets/      # recurse, best quality
+./png2dds_bc7.sh -n textures/                    # dry run
+It uses DirectXTex's texconv for the actual BC7 encoding. If it isn't on PATH, point to it explicitly:
+TEXCONV=/path/to/texconv ./png2dds_bc7.sh textures/
+Behavior highlights:
+- Defaults to BC7_UNORM, no mipmaps, output alongside the source PNGs.
+- -m generates all mip levels; -m 4 generates exactly 4.
+- -s switches to BC7_UNORM_SRGB (use for color/albedo maps).
+- -q fast|normal|max maps to texconv's -bcquick / default / -bcmax.
+- Existing .dds files are skipped unless -f is given.
+- Recursive mode mirrors the folder tree under the output directory.
+- Files are passed to texconv in batches of 128, so large folders don't hit argument limits; texconv handles multithreading internally.
+- Exits non-zero if any conversion failed and prints a converted/skipped/failed summary.
