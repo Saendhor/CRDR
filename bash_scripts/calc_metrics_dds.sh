@@ -87,4 +87,4 @@ echo "Calculating metrics..."
 echo "====================="
 
 cd "$SCRIPT_DIR/.."
-uv run --with texture2ddecoder python "$PYTHON_SCRIPT" --folder "$FOLDER_PATH" ${REF_FOLDER:+--ref "$REF_FOLDER"}
+uv run --no-sync --offline python "$PYTHON_SCRIPT" --folder "$FOLDER_PATH" ${REF_FOLDER:+--ref "$REF_FOLDER"}

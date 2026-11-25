@@ -21,6 +21,7 @@ dependencies = [
     "scikit-image==0.19.3",
     "dists-pytorch>=0.1",
     "vmaf-torch>=0.1",
+    "texture2ddecoder>=1.0.6",
 ]
 
 [tool.uv.sources]

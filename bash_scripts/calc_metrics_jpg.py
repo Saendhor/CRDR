@@ -21,13 +21,15 @@ from skimage.metrics import peak_signal_noise_ratio as psnr
 from tqdm import tqdm
 
 IMAGE_EXTENSIONS = (".jpg", ".jpeg")
+REFERENCE_EXTENSIONS = (".jpg", ".jpeg", ".png")
 
 
-def find_images(folder: Path) -> List[Path]:
-    """Return all JPG/JPEG files in a folder (case-insensitive), sorted by name."""
+def find_images(folder: Path,
+                extensions: Tuple[str, ...] = IMAGE_EXTENSIONS) -> List[Path]:
+    """Return images with one of the given extensions (case-insensitive), sorted by name."""
     return sorted(
         path for path in folder.iterdir()
-        if path.is_file() and path.suffix.lower() in IMAGE_EXTENSIONS
+        if path.is_file() and path.suffix.lower() in extensions
     )
 
 
@@ -50,11 +52,12 @@ def ensure_same_dimensions(img: np.ndarray, ref: np.ndarray) -> Tuple[np.ndarray
     return img, ref
 
 
-def load_images(folder: Path, max_size: int = None) -> Tuple[List[str], List[np.ndarray]]:
-    """Load all JPG images from a folder. Returns (filenames, images)."""
+def load_images(folder: Path, max_size: int = None,
+                extensions: Tuple[str, ...] = IMAGE_EXTENSIONS) -> Tuple[List[str], List[np.ndarray]]:
+    """Load all images from a folder. Returns (filenames, images)."""
     filenames = []
     images = []
-    image_files = find_images(folder)
+    image_files = find_images(folder, extensions)
     
     for img_path in tqdm(image_files, desc="Loading images"):
         filenames.append(img_path.name)
@@ -200,10 +203,13 @@ def calculate_fid(folder: Path, ref_folder: Path = None, max_size: int = 299) ->
     tmp_dir = Path(tempfile.mkdtemp(prefix="fid_"))
 
     try:
-        for src_folder, label in [(folder, "images"), (ref_folder, "ref")]:
+        for src_folder, label, extensions in [
+            (folder, "images", IMAGE_EXTENSIONS),
+            (ref_folder, "ref", REFERENCE_EXTENSIONS),
+        ]:
             dst = tmp_dir / label
             dst.mkdir(parents=True, exist_ok=True)
-            for img_path in find_images(src_folder):
+            for img_path in find_images(src_folder, extensions):
                 img = Image.fromarray(np.array(Image.open(img_path).convert("RGB")))
                 img = img.resize((max_size, max_size), Image.Resampling.LANCZOS)
                 save_name = img_path.stem if img_path.suffix else img_path.name
@@ -263,11 +269,11 @@ def main():
     print(f"Found {len(folder_jpgs)} JPG images in {args.folder}")
     
     if args.ref:
-        ref_jpgs = find_images(args.ref)
-        if not ref_jpgs:
-            print(f"Error: No JPG images found in reference folder: {args.ref}")
+        ref_images_paths = find_images(args.ref, REFERENCE_EXTENSIONS)
+        if not ref_images_paths:
+            print(f"Error: No JPG/PNG images found in reference folder: {args.ref}")
             sys.exit(1)
-        print(f"Found {len(ref_jpgs)} JPG images in reference folder: {args.ref}")
+        print(f"Found {len(ref_images_paths)} reference images in reference folder: {args.ref}")
     
     # Set device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -285,7 +291,7 @@ def main():
     if need_images and args.ref:
         print("\nLoading images...")
         filenames, images = load_images(args.folder, args.max_size)
-        _, ref_images = load_images(args.ref, args.max_size)
+        _, ref_images = load_images(args.ref, args.max_size, REFERENCE_EXTENSIONS)
         
         if len(images) != len(ref_images):
             print(f"Warning: Number of images mismatch ({len(images)} vs {len(ref_images)})")

@@ -72,13 +72,13 @@ if [ -n "$REF_FOLDER" ]; then
         exit 1
     fi
     
-    REF_JPG_COUNT=$(find "$REF_FOLDER" -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.jpeg" \) | wc -l)
-    if [ "$REF_JPG_COUNT" -eq 0 ]; then
-        echo "Error: No JPG images found in reference folder: $REF_FOLDER"
+    REF_IMAGE_COUNT=$(find "$REF_FOLDER" -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | wc -l)
+    if [ "$REF_IMAGE_COUNT" -eq 0 ]; then
+        echo "Error: No JPG/PNG images found in reference folder: $REF_FOLDER"
         exit 1
     fi
     
-    echo "Found $REF_JPG_COUNT JPG images in reference folder: $REF_FOLDER"
+    echo "Found $REF_IMAGE_COUNT reference images in reference folder: $REF_FOLDER"
 fi
 
 # Run Python script
